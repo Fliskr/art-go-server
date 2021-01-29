@@ -1,0 +1,42 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+type Artist {
+  id : ID!
+  name: String!
+  artworks:[Artwork!]!
+}
+
+
+type Artwork {
+  id: ID!
+  title: String!
+  artist: Artist!
+}
+
+type Query{
+  artists(name: String = ""): [Artist!]!
+  artworks(artist: ID = 0): [Artwork!]!
+}
+
+
+input NewArtist{
+  name: String!
+  id: ID
+}
+
+input NewArtwork {
+  title: String!
+  artist: ID!
+  id:ID
+}
+
+type Mutation {
+  createArtist(input: NewArtist!): Artist!
+  createArtwork(input: NewArtwork!): Artwork!
+  updateArtist(input: NewArtist!):Artist!
+  updateArtwork(input: NewArtwork!):Artwork!
+  deleteArtist(input: ID!): String!
+  deleteArtwork(input: ID!): String!
+}
